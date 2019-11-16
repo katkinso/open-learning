@@ -12,7 +12,8 @@
   "dependencies": {
     "dotenv": "^8.2.0",
     "ejs": "^2.7.2",
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "express-validator": "^6.2.0"
   },
   "devDependencies": {
     "jasmine": "^3.5.0",
