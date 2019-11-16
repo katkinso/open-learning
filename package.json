@@ -1,0 +1,19 @@
+{
+  "name": "basic-express",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "export NODE_ENV=test&& jasmine",
+    "start": "node src/server.js" 
+   },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "jasmine": "^3.5.0",
+    "request": "^2.88.0"
+  }
+}
