@@ -27,10 +27,11 @@ module.exports = {
   },
   authenticate(req, res, next){
     passport.authenticate("local")(req, res, function () {
+
       if(!req.user){
         res.json({authenticated: false});
       } else {
-        res.json({authenticated: true});
+        res.json(req.session.passport);
       }
     })
   },
