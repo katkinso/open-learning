@@ -14,6 +14,7 @@ module.exports = {
     app.set("view engine", "ejs");
     app.use(bodyParser.urlencoded({ extended: true }));
     // app.use(expressValidator());
+    app.use(cors());
     app.use(express.json())
     app.use(session({
       secret: process.env.cookieSecret,
