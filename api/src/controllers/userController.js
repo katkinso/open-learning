@@ -27,7 +27,6 @@ module.exports = {
   },
   authenticate(req, res, next){
     passport.authenticate("local")(req, res, function () {
-
       if(!req.user){
         res.json({authenticated: false});
       } else {
@@ -41,5 +40,8 @@ module.exports = {
   },
   protectedTest(req, res, next){
     res.json({protected: "got to protected route"});
+  },
+  unprotectedTest(req, res, next){
+    res.json({protected: "got to unprotected route"});
   }
 }

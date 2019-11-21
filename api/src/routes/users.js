@@ -9,6 +9,7 @@ router.post("/users/register", userValidationRules, validate, userController.reg
 router.post("/users/authenticate", userController.authenticate);
 router.get("/users/logout", userController.logout);
 router.get("/users/protected", helper.ensureAuthenticated, userController.protectedTest); //test route
+router.get("/users/unprotected", userController.unprotectedTest); //test route
 
 
 module.exports = router;
