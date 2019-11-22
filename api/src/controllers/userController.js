@@ -36,7 +36,30 @@ module.exports = {
   },
   logout(req, res, next){
     req.logout();
-    res.status(200).send("logged out")
+    res.json({status: "logged out"});
+  },
+  getUser(req, res, next){
+
+      userQueries.getUser(req.params.id, (err, user) => {
+        if(err || user == null){
+          res.json({error: "user not found"});
+        } else {
+          res.json(user);
+        }
+      });
+  },
+  getMe(req, res, next){
+
+      const { user } = req.session.passport;
+
+      userQueries.getUser(user, (err, user) => {
+        if(err || user == null){
+          res.json({error: "user not found"});
+        } else {
+          res.json(user);
+        }
+      });
+  
   },
   protectedTest(req, res, next){
     res.json({protected: "got to protected route"});

@@ -66,3 +66,24 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/de
 ### `yarn build` fails to minify
 
 This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+
+# -------------------------------------------
+## KATE
+# -------------------------------------------
+### To build css 
+/client 
+`npm run sass`
+
+### To build client
+/client 
+`npm start`
+
+### To build api server
+/api 
+`npm start`
+
+
+### ToDo
+- Handle routing for sending errors & message using history
+- Handle storing sessions in redis
+- Handle '../config.js'; for local dev

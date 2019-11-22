@@ -12,7 +12,8 @@ class Register extends Component {
         this.state = {
             email: "",
             password: "",
-            error: ""
+            error: "",
+            message: ""
         };       
      }
 
@@ -41,14 +42,13 @@ class Register extends Component {
      }
     
 
-
   render(){
 
     return (
 
         <div className="container pt-5">
             <div className="card align-middle">
-                <div className="card-body">
+                <div className="card-body login">
                     <h1>Log in</h1>
 
                     <p>{this.state.error}</p>

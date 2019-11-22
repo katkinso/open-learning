@@ -17,6 +17,15 @@ module.exports = {
     .catch((err) => {
       callback(err);
     })
+  },
+  getUser(id, callback){
+    return User.findByPk(id)
+    .then((user) => {
+      const { id, firstName, lastName, email } = user;
+      callback(null, {id, firstName, lastName, email});
+    })
+    .catch((err) => {
+      callback(err);
+    })
   }
-
 }
