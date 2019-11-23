@@ -87,3 +87,5 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/tr
 - Handle routing for sending errors & message using history
 - Handle storing sessions in redis
 - Handle '../config.js'; for local dev
+- Handle Cookie httpOnly
+- Design 404 Page

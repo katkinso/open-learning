@@ -1,30 +1,81 @@
 $secondary: #1BB954;
 $very-dark-gray: #313640;
 $light-gray: #9198A4;
+$very-light-gray: #CAD7DC;
 $primary: #08b3e2;
 $background-color: #fff;
 
-$bright-blue: #037FA7;
+$bright-blue: #037FA7; 
+$brighter-blue: #7BD4F1; 
 $bright-green: #0ED9A2;
 
 $primary-blue: #01394C;
 $tertiary-blue: #3C656F;
+
+$light-yellow: #F4E095;
 
 
 //Formatting   
 body {
   margin: 0;
   padding: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
+  font-family: "Helvetica Neue", -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: $background-color;
 }
 
+header {
+  color: #ffffff;
+  font-size: 0.8rem;
+}
+
 header.header-top {
   background-color: $bright-blue;
+}
+
+header h1, header h2, header h3 {
+  font-size: 0.7rem;
+  margin-bottom: .7rem;
+}
+
+header h1 {
+  margin-bottom: .2rem;
+}
+
+header h2 {
+  font-size: 1rem;
+}
+
+.header-sub .notice{
+  color: $light-yellow;
+}
+
+
+header .text-sm-muted {
+  color: $very-light-gray;
+  font-size: 0.7rem;
+}
+
+.text-brighter-blue{
+  color: $brighter-blue
+}
+
+.header-top button, .header-top button:active, .header-top button:hover{
+  background-color: #C2E4EE;
+  border: 0;
+  color: #335660;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  font-weight: bold;
+  padding:10px;
+  border-radius: .2rem;
+}
+
+.header-top img.avatar{
+    width: 40px;
+    border-radius: 50%;
 }
 
 header.header-sub {
@@ -37,7 +88,15 @@ header.header-sub {
   border-left: $bright-green 5px solid !important;
 }
 
+///----
 
+.course-list-item {
+    border-bottom: 1px solid #4A4A4A;
+    border-left: 1px solid  #4A4A4A;
+    border-right: 1px solid  #4A4A4A;
+}
+
+///----
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",

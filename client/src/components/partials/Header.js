@@ -13,8 +13,8 @@ const Header = props => {
                 <img src="/assets/images/logo.png" width="40px" alt="logo" />
             </div>
             <div className="col-4 d-flex justify-content-end align-items-center">
-                <p>{user.email}</p>
-                <p>{user.firstName}</p>
+                <img src="/assets/images/feathers.png" alt="avatar" className="avatar" />
+                <p className="user-info px-3 font-weight-bold text-capitalize">{user.firstName} {user.lastName}</p>
                 <Button action={props.logout} type="button" text="logout" />
             </div>
           </div>
