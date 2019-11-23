@@ -6,59 +6,82 @@ const base = "http://localhost:9000";
 
 describe("routes : users", () => {
 
-  sequelize.sync({ force: true })
-  .then((res) => {
-      done();
-  })
-  .catch((err) => {
-      console.log(err);
-      done();
+  beforeAll((done) => {
+      sequelize.sync({force: true})
+      .then(() => {
+        done();
+      })
+      .catch((err) => {
+        done();
+      });
+
+      this.user = {
+        email: "test@test.com",
+        firstName: 'testFirst',
+        lastName: 'testLast'
+      }
+      
+      this.userId = 1;
+      this.password = '123456'
+
   });
-  
 
-  beforeEach(() => {
-    this.email = "test@test.com",
-    this.password = "123456"
-  })
-
-
-
+  //DESCRIBE ------
   describe("GET /users/register", () => {
 
 
-    it("should return status code 200", (done) => {
+    it("should return status code 200 and verify the body matches the user", (done) => {
       request.post({
           url: `${base}/users/register`,
-          form: {
-              email: this.email,
-              password: this.password,
-              passwordConfirmation: this.password
+          form: { 
+            ...this.user, 
+            "password":this.password, 
+            "passwordConfirmation":this.password 
           }
         },(err, res, body) => {
+        
+        const user = { ...this.user, id: this.userId }
+
         expect(res.statusCode).toBe(200);
-
-        console.log(res)
-
-        expect(body).toEqual('{"authenticated":true}');
+        expect(body).toContain(this.userId);
         done();
       });
     });
 
-    // it("should return status code 200", (done) => {
-    //   request.post({
-    //       url: `${base}/users/authenticate`,
-    //       form: {
-    //           email: this.email,
-    //           password: this.password
-    //       }
-    //     },(err, res, body) => {
-    //     expect(res.statusCode).toBe(200);
+    //----
+    it("should return status code 200 and verify the user email", (done) => {
+      request.post({
+          url: `${base}/users/authenticate`,
+          form: {
+              email: this.user.email,
+              password: this.password
+          }
+        },(err, res, body) => {
 
-    //     console.log(res)
+        expect(res.statusCode).toBe(200);
+        expect(body).toContain(this.user.email);
+        done();
+      });
+    });
 
-    //     // expect(body).toContain(this.userId);
-    //     done();
-    //   });
-    // });
+    //---
+    it("should return status code 403", (done) => {
+      request.post({
+          url: `${base}/users/register`,
+          form: { 
+            ...this.user, 
+            "password":this.password, 
+            "passwordConfirmation":this.password 
+          }
+        },(err, res, body) => {
+        
+        const user = { ...this.user, id: this.userId }
+
+        expect(res.statusCode).toBe(403);
+        done();
+      });
+    });
+    
+
   });//DESCRIBE
 });

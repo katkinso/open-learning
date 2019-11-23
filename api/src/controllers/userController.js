@@ -16,11 +16,12 @@ module.exports = {
         userQueries.createUser(newUser, (err, user) => {
         if(err){
             err.errors.map((errors) => {
-                res.json(errors.message)
+                res.status(403).json(errors.message)
             })
         } else {
             passport.authenticate("local")(req, res, () => {
-                res.json({authenticated: true});
+                const {id, firstName, lastName, email } = req.user;
+                res.json({id, firstName, lastName, email });
             })
         }
         });
@@ -28,9 +29,10 @@ module.exports = {
   authenticate(req, res, next){
     passport.authenticate("local")(req, res, function () {
       if(!req.user){
-        res.json({authenticated: false});
+        res.status(401).res.json({authenticated: false});
       } else {
-        res.json(req.session.passport);
+        const {id, firstName, lastName, email } = req.user;
+        res.json({id, firstName, lastName, email });
       }
     })
   },
