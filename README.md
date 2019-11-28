@@ -6,11 +6,14 @@ This project allows students to sign up for open sessions and view sessions they
 
 ## Local Development 
 
-The project runs an express server to server the API and runs a react client. To run the local dev environment you need to run the API server and the Client in parallel.
+The project runs an express server to server the API and runs a react client. To run the local dev environment you need to run the API server and the Client in parallel. 
 
-The API runs on http://localhost:9000
+- The API runs on http://localhost:9000
 
-The Client runs on http://localhost:3000
+- The Client runs on http://localhost:3000
+
+- [REST API Docs](https://documenter.getpostman.com/view/9632917/SW7gU4tQ?version=latest#9c2c4b83-2ecb-4f5c-a0b5-f6f3fbc52af7)
+
 
 ---
 
@@ -37,7 +40,6 @@ The Client runs on http://localhost:3000
 - `npm test`
 
 ---
-
 
 ## ToDo
 - Handle routing for sending errors & message using history
