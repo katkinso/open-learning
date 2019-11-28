@@ -7,13 +7,6 @@ const base = "http://localhost:9000";
 describe("routes : users", () => {
 
   beforeAll((done) => {
-      sequelize.sync({force: true})
-      .then(() => {
-        done();
-      })
-      .catch((err) => {
-        done();
-      });
 
       this.user = {
         email: "test@test.com",
@@ -24,11 +17,19 @@ describe("routes : users", () => {
       this.userId = 1;
       this.password = '123456'
 
+      sequelize.sync({force: true})
+      .then(() => {
+        done();
+      })
+      .catch((err) => {
+        done();
+      });
+
   });
+
 
   //DESCRIBE ------
   describe("GET /users/register", () => {
-
 
     it("should return status code 200 and verify the body matches the user", (done) => {
       request.post({

@@ -46,28 +46,35 @@ class Register extends Component {
 
     return (
 
-        <div className="container pt-5">
-            <div className="card align-middle">
-                <div className="card-body login">
-                    <h1>Log in</h1>
+        <div className="container login">
 
+            <div className="row">
+                <div className="col-sm"></div>
+                <div className="col-sm-4">
+
+                    { /* CARD START */}
+                    <div className="card align-middle shadow-sm bg-white rounded my-5">
+                    <div className="card-body p-5">
+                    
+                    <div className="mx-auto pb-3 logo">
+                        <img src="/assets/images/logo.png" width="50px" alt="logo" />
+                    </div>
+                    
                     <p>{this.state.error}</p>
 
                     <form onSubmit={e => this.handleSubmit(e)}>
 
                         <div className="form-group">
-                        <label>Email</label>
                         <TextInput 
                             id="email"
                             type="email" 
-                            placeholder="Enter Email" 
+                            placeholder="email" 
                             value={this.state.email} 
                             onChange={(e) => this.handleInputChange(e) }
                         />
                         </div>
 
-                        <div className="form-group">
-                        <label>Password</label>
+                        <div className="form-group pb-3">
                             <TextInput 
                             id="password"
                             type="password" 
@@ -76,14 +83,19 @@ class Register extends Component {
                             onChange={(e) => this.handleInputChange(e)}
                             />
                         </div>
-
-                        <Button type="submit" text="Login" />   
+                        <Button type="submit" text="LOG IN" for="login" />   
 
                     </form>
-
+    
+                    </div>
                 </div>
+                { /* CARD END */}
+
             </div>
+            <div className="col-sm"></div>
         </div>
+    </div>
+    /* CONTAINER END */
       
     );
   }

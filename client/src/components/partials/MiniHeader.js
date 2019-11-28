@@ -9,10 +9,10 @@ const Header = props => {
                     <div className="col-5 pt-1">
                         <span className="notice">Remember, Thursday is a holiday! Don’t forget to submit your answers to the latest survey</span>
                     </div>
-                <div className="col-3 d-flex justify-content-end align-items-center"></div>
+                    <div className="col-3 d-flex justify-content-end align-items-center"></div>
+                </div>
             </div>
-            </div>
-            
+
         </header>
     )
 }

@@ -18,6 +18,19 @@ module.exports = (sequelize, DataTypes) => {
   }, {});
   User.associate = function(models) {
     // associations can be defined here
+
+    // User.belongsToMany(models.Session, {
+    //   through: 'UserSessions',
+    //   foreignKey: 'userId',
+    //   as: "sessions",
+    //   onDelete: 'CASCADE'
+    // });
+
+    // User.hasMany(models.UserSessions, {
+    //   foreignKey: "userId",
+    //   as: "usersessions"
+    // });
+
   };
   return User;
 };

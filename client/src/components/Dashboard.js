@@ -1,11 +1,12 @@
 import React, { Component } from "react";
-import { withRouter } from 'react-router-dom'
+import { withRouter, Link } from 'react-router-dom'
 import api from '../api/api'
+import utils from '../utils/utils'
 import Header from './partials/Header'
 import SubHeader from './partials/SubHeader'
 import MiniHeader from './partials/MiniHeader'
-import CourseList from './partials/CourseList'
-import Cookies from 'universal-cookie';
+import SessionList from './partials/SessionList'
+
 
 
 class Dashboard extends Component {
@@ -16,21 +17,14 @@ class Dashboard extends Component {
       super(props);
 
       this.state = {
+          message: "",
           user: {
             id:"",
             email:"",
             firstName: "",
             lastName: ""
           },
-          courses: [
-            {id: 35, name: 'Binary Search Trees', spotsAvailable: 10, totalSpots: 15, 
-                instructor: "Lucy Andersen", UTCDateTime: '2019-11-11T15:27:38Z',
-                catagories: ['computer science']},
-            {id: 36, name: 'Nodejs', spotsAvailable: 10, totalSpots: 15,
-                instructor: "Jon Smith", UTCDateTime: '2019-12-11T15:27:38Z',
-                catagories: ['react', 'javascript', 'node.js']
-            }
-          ]
+          sessions: []
         
       };     
 
@@ -46,9 +40,17 @@ class Dashboard extends Component {
         }
       })
 
-      
-
-
+      api.sessions('info', (err,res) => {
+        if (!err){
+            const sessions = res.data;
+            this.setState({sessions})
+        }else{
+            this.props.history.push({
+                pathname: '/authenticate', 
+                state: {error: "access denied"}
+            })
+        }
+      })
   }
 
   logout(){
@@ -56,32 +58,14 @@ class Dashboard extends Component {
       if (!err){
         this.props.history.push({
           pathname: '/authenticate', 
-          state: {message: "logged out"}
-        }) //TODO - need to handle passed back state in authenticate component.
+          state: { message: "logged out" }
+        })
       }else{
           console.log(err)
       }
-  })
+    })
   }
 
-  componentDidMount() {
-    const cookies = new Cookies();
-   
-      if ((!cookies.get('connect.sid')) && (!this.state.user.id)){
-
-        api.me((err,res) => {
-          if (!err){
-              const user = res.data;
-              this.setState({user})
-          }else{
-              this.props.history.push({
-                  pathname: '/authenticate', 
-                  state: {error: "access denied"}
-              }) //TODO - need to handle passed back state in authenticate component.
-          }
-        })
-      }
- }
 
  render(){
 
@@ -92,7 +76,7 @@ class Dashboard extends Component {
             <SubHeader />
             <MiniHeader />
 
-            <CourseList courses={this.state.courses} />
+            <SessionList sessions={this.state.sessions} />
 
             
         </div>

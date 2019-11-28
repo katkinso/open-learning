@@ -46,8 +46,36 @@ const logout = (cb) => {
    })
 }
 
+const sessions = (query, cb) => {
+   axios({
+       method: 'get',
+       url: '/sessions'
+    })
+   .then((res) => {
+      cb(null,res)
+   })
+   .catch(function (err) {
+      cb(err)
+   })
+}
 
-export default { authenticate, me, logout }
+const session = (id, cb) => {
+
+   axios({
+       method: 'get',
+       url: `/sessions/${id}`
+    })
+   .then((res) => {
+       cb(null,res)
+   })
+   .catch(function (err) {
+
+      cb(err)
+   })
+}
+
+
+export default { authenticate, me, logout, sessions, session }
 
 
 

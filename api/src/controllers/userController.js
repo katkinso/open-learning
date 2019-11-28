@@ -44,7 +44,7 @@ module.exports = {
 
       userQueries.getUser(req.params.id, (err, user) => {
         if(err || user == null){
-          res.json({error: "user not found"});
+          res.status(404).json({error: "user not found"});
         } else {
           res.json(user);
         }
@@ -56,13 +56,13 @@ module.exports = {
 
       userQueries.getUser(user, (err, user) => {
         if(err || user == null){
-          res.json({error: "user not found"});
+          res.status(404).json({error: "user not found"});
         } else {
           res.json(user);
         }
       });
-  
   },
+  
   protectedTest(req, res, next){
     res.json({protected: "got to protected route"});
   },
