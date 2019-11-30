@@ -1,4 +1,8 @@
 const Session = require("./models").Session;
+const UserSessions = require("./models").UserSessions;
+const moment = require('moment')
+var Sequelize = require('sequelize');
+const Op = Sequelize.Op;
 
 module.exports = {
   createSession(newSession, callback){
@@ -21,8 +25,13 @@ module.exports = {
   },
   getSessions(req, callback){
     return Session.findAll({
+      where: {
+        dateTime: {
+          [Op.gte]: moment()
+        }
+      },
       order: [
-        ['dateTime', 'DESC'],
+        ['dateTime', 'ASC'],
         ['name', 'DESC']
       ]
     })
@@ -41,5 +50,28 @@ module.exports = {
     .catch((err) => {
       callback(err);
     })
-  }
+  },
+  registration(newUserSession, callback){
+
+    return UserSessions.create(newUserSession)
+    .then((session) => {
+      callback(null, session);
+    })
+    .catch((err) => {
+      callback(err);
+    })
+  },
+  delete(id, callback){
+    return Session.destroy({
+      where: { id }
+    })
+    .then((deletedRecordsCount) => {
+      console.log(deletedRecordsCount)
+      callback(null, deletedRecordsCount);
+    })
+    .catch((err) => {
+      callback(err);
+    })
+  },
 }
+

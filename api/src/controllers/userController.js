@@ -63,6 +63,7 @@ module.exports = {
       });
   },
   
+  
   protectedTest(req, res, next){
     res.json({protected: "got to protected route"});
   },

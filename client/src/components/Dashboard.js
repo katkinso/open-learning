@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { withRouter, Link } from 'react-router-dom'
+import { Link, withRouter } from 'react-router-dom'
 import api from '../api/api'
 import utils from '../utils/utils'
 import Header from './partials/Header'
@@ -8,9 +8,7 @@ import MiniHeader from './partials/MiniHeader'
 import SessionList from './partials/SessionList'
 
 
-
 class Dashboard extends Component {
-
 
   constructor(props) {
 
@@ -22,21 +20,34 @@ class Dashboard extends Component {
             id:"",
             email:"",
             firstName: "",
-            lastName: ""
+            lastName: "",
+            sessions: [],
+            nextSession: ""
           },
-          sessions: []
-        
+          sessions: [],
+          notification: "Remember, Thursday is a holiday! Don’t forget to submit your answers to the latest survey"
       };     
+
+      if (!utils.checkCookie()) {
+          props.history.push({
+          pathname: '/authenticate',
+          state: { error: "access denied" }
+        })
+      }
 
       api.me((err,res) => {
         if (!err){
             const user = res.data;
-            this.setState({user})
-        }else{
-            this.props.history.push({
-                pathname: '/authenticate', 
-                state: {error: "access denied"}
+            const userSessions = []
+
+            user.sessions.map((session) => {
+              userSessions.push(session.id);
             })
+
+            user.nextSession = user.sessions[0]; //latest date
+            user.sessions = userSessions;
+
+            this.setState({user})
         }
       })
 
@@ -44,13 +55,9 @@ class Dashboard extends Component {
         if (!err){
             const sessions = res.data;
             this.setState({sessions})
-        }else{
-            this.props.history.push({
-                pathname: '/authenticate', 
-                state: {error: "access denied"}
-            })
         }
       })
+
   }
 
   logout(){
@@ -60,8 +67,6 @@ class Dashboard extends Component {
           pathname: '/authenticate', 
           state: { message: "logged out" }
         })
-      }else{
-          console.log(err)
       }
     })
   }
@@ -69,21 +74,18 @@ class Dashboard extends Component {
 
  render(){
 
+    const { user, sessions, notification } = this.state;
 
     return (
-        <div className="container-fluid p-0">
-            <Header user={this.state.user} logout={() => this.logout()}/>
-            <SubHeader />
-            <MiniHeader />
-
-            <SessionList sessions={this.state.sessions} />
-
-            
+        <div className="container-fluid px-0 pb-5">
+            <Header user={user} logout={() => this.logout()}/>
+            <SubHeader nextSession={user.nextSession} />
+            <MiniHeader notification={notification} />
+            <SessionList sessions={sessions} userSessions={user.sessions}  />
         </div>
       
     );
   }
-
 };
 
 export default withRouter(Dashboard);

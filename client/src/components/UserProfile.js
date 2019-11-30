@@ -4,9 +4,8 @@ import Cookies from 'universal-cookie';
 import { Link } from "react-router-dom";
 import utils from '../utils/utils'
 import api from '../api/api'
-
-
-
+import Header from './partials/Header'
+import MiniHeader from './partials/MiniHeader'
 
 class UserProfile extends Component {
 
@@ -40,9 +39,21 @@ class UserProfile extends Component {
 
  render(){
 
+    const { user } = this.state;
+
+    console.log({user})
+
     return (
-        <div className="container-fluid p-0">
-            User Profile Page
+      <div className="container-fluid px-0 pb-5">
+        <Header user={user} logout={() => this.logout()}/>
+        <MiniHeader />
+        <div className="container mt-5">
+
+        <p>{user.firstName}</p>
+        <p>{user.lastName}</p>
+        <p>{user.email}</p>
+        </div>
+
         </div>
       
     );

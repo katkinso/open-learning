@@ -1,12 +1,12 @@
 import React, { Component } from "react";
-import { Link } from 'react-router-dom'
+import { Link, withRouter } from 'react-router-dom'
 import Button from '../ui/Button'
 import utils from '../../utils/utils'
 
 const Header = props => {
 
   if (!utils.checkCookie()) {
-    this.props.history.push({
+      props.history.push({
       pathname: '/authenticate',
       state: { error: "access denied" }
     })
@@ -19,7 +19,7 @@ const Header = props => {
       <div className="container-fluid">
         <div className="row flex-nowrap justify-content-between align-items-center">
           <div className="col-4 p-1">
-            <img src="/assets/images/logo.png" width="40px" alt="logo" />
+          <Link to="/dashboard"><img src="/assets/images/logo.png" width="40px" alt="logo" /></Link>
           </div>
           <div className="col-4 d-flex justify-content-end align-items-center">
             <img src="/assets/images/feathers.png" alt="avatar" className="avatar" />
@@ -37,4 +37,4 @@ const Header = props => {
   )
 }
 
-export default Header
+export default withRouter(Header);
