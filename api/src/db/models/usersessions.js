@@ -1,6 +1,15 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
-  const UserSessions = sequelize.define('UserSessions', {
+  var UserSessions = sequelize.define('UserSessions', {
+    userId: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      references: {
+        model: "User",
+        key: "id",
+        as: "userId",
+      }
+    },
     sessionId: {
       type: DataTypes.INTEGER,
       allowNull: false,
@@ -8,29 +17,11 @@ module.exports = (sequelize, DataTypes) => {
         model: "Session",
         key: "id",
         as: "sessionId",
-        }
-      },
-      userId: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-        references: {
-          model: "User",
-          key: "id",
-          as: "userId",
-        }
       }
+    }
   }, {});
   UserSessions.associate = function(models) {
-    // associations can be defined here
-    // UserSessions.belongsTo(models.User, {
-    //   foreignKey: "userId",
-    //   onDelete: "CASCADE"
-    // });
-
-    // UserSessions.belongsTo(models.Session, {
-    //   foreignKey: "sessionId",
-    //   onDelete: "CASCADE"
-    // });
+    // associations can be defined here 
   };
   return UserSessions;
 };

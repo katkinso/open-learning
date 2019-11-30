@@ -40,5 +40,31 @@ module.exports = {
             res.json(session);
         }
       });
-  }
+  },
+  registration(req, res, next){
+
+        let newUserSession = {
+            userId: req.body.userId,
+            sessionId: req.body.sessionId
+        };
+
+        sessionQueries.registration(newUserSession, (err, session) => {
+            if(err){
+                res.status(403).json(err)
+            } else {
+                res.json(session);
+            }
+        });
+   },
+   delete(req, res, next){
+
+        sessionQueries.delete(req.params.id, (err, session) => {
+            if(err){
+                res.json({error: "Session not found"})
+            } else {
+                res.json(session);
+            }
+        });
+    },
+  
 }

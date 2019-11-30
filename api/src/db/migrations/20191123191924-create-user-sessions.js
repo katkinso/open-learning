@@ -8,24 +8,22 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      sessionId: {
-        type: Sequelize.INTEGER,
-        onDelete: 'CASCADE',
-        allowNull: false,
-        references: {
-          model: "Sessions",
-          key: "id",
-          as: "sessionId",
-        }
-      },
       userId: {
         type: Sequelize.INTEGER,
         onDelete: 'CASCADE',
-        allowNull: false,
         references: {
           model: "Users",
           key: "id",
           as: "userId",
+        }
+      },
+      sessionId: {
+        type: Sequelize.INTEGER,
+        onDelete: 'CASCADE',
+        references: {
+          model: "Sessions",
+          key: "id",
+          as: "sessionId",
         }
       },
       createdAt: {

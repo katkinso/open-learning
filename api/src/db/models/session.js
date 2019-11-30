@@ -10,7 +10,12 @@ module.exports = (sequelize, DataTypes) => {
     dateTime: DataTypes.DATE
   }, {});
   Session.associate = function(models) {
-
+    Session.belongsToMany(models.User, {
+      through: 'UserSessions',
+      foreignKey: 'sessionId',
+      as: "sessions",
+      onDelete: 'CASCADE'
+    });
   };
   return Session;
 };

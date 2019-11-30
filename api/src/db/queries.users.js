@@ -1,4 +1,10 @@
 const User = require("./models").User;
+const Session = require("./models").Session;
+const UserSessions = require("./models").UserSessions;
+const moment = require('moment')
+var Sequelize = require('sequelize');
+const Op = Sequelize.Op;
+
 const bcrypt = require("bcryptjs");
 
 module.exports = {
@@ -19,10 +25,24 @@ module.exports = {
     })
   },
   getUser(id, callback){
-    return User.findByPk(id)
+    return User.findByPk(id, {
+      include: [{
+        model: Session,
+        as: "sessions",
+        required: false,
+        through: {attributes: []},
+        where: {
+          dateTime: {
+            [Op.gte]: moment()
+          }
+        }
+      }],
+        order: [[{model: Session, as: 'sessions'}, 'dateTime']],
+        
+    })
     .then((user) => {
-      const { id, firstName, lastName, email } = user;
-      callback(null, {id, firstName, lastName, email});
+      const { id, firstName, lastName, email, sessions } = user;
+      callback(null, {id, firstName, lastName, email, sessions});
     })
     .catch((err) => {
       callback(err);
